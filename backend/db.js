@@ -38,11 +38,15 @@ function readLocalDatabase() {
 }
 
 function writeLocalDatabase(data) {
-  const dir = path.dirname(DB_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+  try {
+    const dir = path.dirname(DB_FILE);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf8');
+  } catch (err) {
+    console.warn('Local database write skipped (read-only environment):', err.message);
   }
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf8');
 }
 
 // Database Connection Initialization

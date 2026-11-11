@@ -216,7 +216,14 @@ initDB().then(() => {
     }, 12 * 60 * 60 * 1000);
   }
 
-  app.listen(PORT, () => {
-    console.log(`Backend server running at http://localhost:${PORT}`);
-  });
+  // Start HTTP listener when run directly (local development)
+  if (process.env.VERCEL !== '1') {
+    app.listen(PORT, () => {
+      console.log(`Backend server running at http://localhost:${PORT}`);
+    });
+  }
+}).catch(err => {
+  console.error('Database initialization error:', err);
 });
+
+module.exports = app;
