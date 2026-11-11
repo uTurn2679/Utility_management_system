@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Task Environments (PEAS Description) - AI Presentation</title>
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dynamic Glowing Background Blobs -->
+  <div class="glow-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Global App Container -->
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="main-header">
+      <div class="logo">
+        <i data-lucide="cpu" class="logo-icon"></i>
+        <span>AI Agent Theory</span>
+      </div>
+      <div class="theme-badge">
+        <span>PEAS Framework</span>
+      </div>
+    </header>
+
+    <!-- Slide Deck Container -->
+    <main class="slides-container" id="slidesContainer">
+
+      <!-- Slide 1: Title (Hero) -->
+      <section class="slide active" id="slide-1">
+        <div class="hero-content">
+          <div class="badge animate-slide-up">Interactive Slide Deck</div>
+          <h1 class="animate-slide-up-delay-1">Task Environment & The <span class="gradient-text">PEAS</span> Framework</h1>
+          <p class="subtitle animate-slide-up-delay-2">
+            A comprehensive guide to analyzing intelligent agents through Performance Measures, Environments, Actuators, and Sensors.
+          </p>
+          <div class="hero-actions animate-slide-up-delay-3">
+            <button class="btn btn-primary" onclick="goToSlide(2)">
+              <span>Explore Presentation</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+            <span class="navigation-tip">Use <kbd>←</kbd> <kbd>→</kbd> keys to navigate</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: Intro to Agents & Environments -->
+      <section class="slide" id="slide-2">
+        <div class="slide-grid-2">
+          <div class="slide-text">
+            <h2>The Agent-Environment <span class="gradient-text">Loop</span></h2>
+            <p class="slide-desc">
+              In Artificial Intelligence, an <strong>Agent</strong> is anything that can perceive its environment through <strong>Sensors</strong> and act upon that environment through <strong>Actuators</strong>.
+            </p>
+            <div class="info-card">
+              <i data-lucide="info" class="card-icon blue"></i>
+              <div>
+                <h4>First Step of AI Design</h4>
+                <p>Before writing a single line of agent code, we must specify the <strong>Task Environment</strong> as fully as possible. This is where PEAS comes in.</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-visual">
+            <div class="loop-visualizer">
+              <div class="node environment-node">
+                <i data-lucide="globe"></i>
+                <span>Environment</span>
+              </div>
+              <div class="flow-line flow-to-agent">
+                <span class="flow-label">Percepts (Sensors)</span>
+                <div class="flow-dot"></div>
+              </div>
+              <div class="node agent-node">
+                <i data-lucide="bot"></i>
+                <span>Agent</span>
+              </div>
+              <div class="flow-line flow-to-env">
+                <span class="flow-label">Actions (Actuators)</span>
+                <div class="flow-dot"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: PEAS Breakdown -->
+      <section class="slide" id="slide-3">
+        <h2>What does <span class="gradient-text">PEAS</span> stand for?</h2>
+        <p class="slide-desc">To design an intelligent agent, we must formulate its task environment using four distinct categories:</p>
+        
+        <div class="peas-grid">
+          <!-- P Card -->
+          <div class="peas-card" style="--card-index: 1;">
+            <div class="peas-letter p-letter">P</div>
+            <div class="peas-content">
+              <h3>Performance Measure</h3>
+              <p>The objective criteria used to evaluate how successful the agent's behavior is. It defines "what is wanted" rather than "how to achieve it".</p>
+              <ul class="peas-examples">
+                <li><i data-lucide="check-circle-2"></i> Safety</li>
+                <li><i data-lucide="check-circle-2"></i> Speed</li>
+                <li><i data-lucide="check-circle-2"></i> Energy efficiency</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- E Card -->
+          <div class="peas-card" style="--card-index: 2;">
+            <div class="peas-letter e-letter">E</div>
+            <div class="peas-content">
+              <h3>Environment</h3>
+              <p>The external world or context in which the agent operates. This includes all elements, factors, and agents surrounding the AI.</p>
+              <ul class="peas-examples">
+                <li><i data-lucide="globe"></i> Public roads</li>
+                <li><i data-lucide="globe"></i> Hospital databases</li>
+                <li><i data-lucide="globe"></i> Web servers</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- A Card -->
+          <div class="peas-card" style="--card-index: 3;">
+            <div class="peas-letter a-letter">A</div>
+            <div class="peas-content">
+              <h3>Actuators</h3>
+              <p>The hardware or software mechanisms that allow the agent to exert physical or digital influence and execute actions.</p>
+              <ul class="peas-examples">
+                <li><i data-lucide="zap"></i> Steering wheel & brakes</li>
+                <li><i data-lucide="zap"></i> Screen displays</li>
+                <li><i data-lucide="zap"></i> Robot joints / limbs</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- S Card -->
+          <div class="peas-card" style="--card-index: 4;">
+            <div class="peas-letter s-letter">S</div>
+            <div class="peas-content">
+              <h3>Sensors</h3>
+              <p>The inputs or perceptual devices that let the agent receive information, feedback, and telemetry from its environment.</p>
+              <ul class="peas-examples">
+                <li><i data-lucide="eye"></i> Video cameras</li>
+                <li><i data-lucide="eye"></i> Keyboards / API logs</li>
+                <li><i data-lucide="eye"></i> Sonar / Lidar sensors</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Interactive PEAS Showcase -->
+      <section class="slide" id="slide-4">
+        <h2>Interactive <span class="gradient-text">PEAS</span> Showcase</h2>
+        <p class="slide-desc">Select an agent type to see how the PEAS framework is applied to design its architecture.</p>
+        
+        <div class="showcase-container">
+          <aside class="agent-selector">
+            <button class="selector-btn active" data-agent="taxi">
+              <i data-lucide="car"></i>
+              <span>Automated Taxi Driver</span>
+            </button>
+            <button class="selector-btn" data-agent="medical">
+              <i data-lucide="activity"></i>
+              <span>Medical Diagnosis System</span>
+            </button>
+            <button class="selector-btn" data-agent="soccer">
+              <i data-lucide="dribbble"></i>
+              <span>Robot Soccer Player</span>
+            </button>
+            <button class="selector-btn" data-agent="shopping">
+              <i data-lucide="shopping-cart"></i>
+              <span>E-commerce Shopping Agent</span>
+            </button>
+            <button class="selector-btn" data-agent="vacuum">
+              <i data-lucide="wind"></i>
+              <span>Vacuum Cleaner Agent</span>
+            </button>
+          </aside>
+
+          <div class="showcase-display">
+            <div class="showcase-header">
+              <h3 id="showcase-agent-title">Automated Taxi Driver</h3>
+              <p id="showcase-agent-desc">A self-driving vehicle that must transport passengers safely and efficiently through urban traffic.</p>
+            </div>
+            
+            <div class="showcase-grid">
+              <!-- Performance -->
+              <div class="showcase-card p-theme">
+                <div class="card-header">
+                  <div class="icon-wrap"><i data-lucide="award"></i></div>
+                  <h4>Performance Measure</h4>
+                </div>
+                <ul id="showcase-p-list">
+                  <li>Safe delivery of passenger</li>
+                  <li>Minimized journey time and cost</li>
+                  <li>Legal driving (obey traffic rules)</li>
+                  <li>Comfortable ride experience</li>
+                </ul>
+              </div>
+
+              <!-- Environment -->
+              <div class="showcase-card e-theme">
+                <div class="card-header">
+                  <div class="icon-wrap"><i data-lucide="map-pin"></i></div>
+                  <h4>Environment</h4>
+                </div>
+                <ul id="showcase-e-list">
+                  <li>Public roads and highways</li>
+                  <li>Other motorists, pedestrians, and cyclists</li>
+                  <li>Weather variations and road hazards</li>
+                  <li>Traffic signals and signs</li>
+                </ul>
+              </div>
+
+              <!-- Actuators -->
+              <div class="showcase-card a-theme">
+                <div class="card-header">
+                  <div class="icon-wrap"><i data-lucide="settings"></i></div>
+                  <h4>Actuators</h4>
+                </div>
+                <ul id="showcase-a-list">
+                  <li>Steering wheel motor</li>
+                  <li>Accelerator and brake pedals</li>
+                  <li>Turn signals and horn</li>
+                  <li>Display screen / audio alerts for passengers</li>
+                </ul>
+              </div>
+
+              <!-- Sensors -->
+              <div class="showcase-card s-theme">
+                <div class="card-header">
+                  <div class="icon-wrap"><i data-lucide="radar"></i></div>
+                  <h4>Sensors</h4>
+                </div>
+                <ul id="showcase-s-list">
+                  <li>Cameras & Computer Vision</li>
+                  <li>Lidar / Radar depth sensors</li>
+                  <li>GPS / Inertial navigation units</li>
+                  <li>Odometer and engine tachometers</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5: Properties of Task Environments - Part 1 -->
+      <section class="slide" id="slide-5">
+        <h2>Task Environment <span class="gradient-text">Classifications (Part 1)</span></h2>
+        <p class="slide-desc">Task environments vary along critical dimensions. Let's look at the first three dimensions:</p>
+        
+        <div class="properties-container">
+          <!-- Property 1 -->
+          <div class="property-block">
+            <div class="property-header">
+              <i data-lucide="eye" class="prop-icon"></i>
+              <h3>Fully Observable vs. Partially Observable</h3>
+            </div>
+            <p class="prop-desc">Can the agent detect the *entire state* of the environment at any given time via its sensors?</p>
+            <div class="prop-comparison">
+              <div class="comp-box">
+                <span class="comp-title font-semibold text-emerald-400">Fully Observable</span>
+                <p>Chess (the board state is perfectly visible at all times).</p>
+              </div>
+              <div class="comp-box">
+                <span class="comp-title font-semibold text-rose-400">Partially Observable</span>
+                <p>Automated Taxi (cannot see behind building corners or other cars).</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Property 2 -->
+          <div class="property-block">
+            <div class="property-header">
+              <i data-lucide="users" class="prop-icon"></i>
+              <h3>Single Agent vs. Multi-Agent</h3>
+            </div>
+            <p class="prop-desc">Does the environment contain other agents who also have goals and choose actions?</p>
+            <div class="prop-comparison">
+              <div class="comp-box">
+                <span class="comp-title font-semibold text-emerald-400">Single Agent</span>
+                <p>Crossword Puzzle (only one player's actions affect performance).</p>
+              </div>
+              <div class="comp-box">
+                <span class="comp-title font-semibold text-rose-400">Multi-Agent</span>
+                <p>Chess or Robot Soccer (competitive or cooperative multi-agent dynamics).</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Property 3 -->
+          <div class="property-block">
+            <div class="property-header">
+              <i data-lucide="shuffle" class="prop-icon"></i>
+              <h3>Deterministic vs. Stochastic</h3>
+            </div>
+            <p class="prop-desc">Is the next state of the environment completely determined by the current state and the agent's action?</p>
+            <div class="prop-comparison">
+              <div class="comp-box">
+                <span class="comp-title font-semibold text-emerald-400">Deterministic</span>
+                <p>Sudoku (each move yields a completely certain outcome).</p>
+              </div>
+              <div class="comp-box">
+                <span class="comp-title font-semibold text-rose-400">Stochastic</span>
+                <p>Taxi Driving (unpredictable behavior of pedestrians, weather, traffic).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6: Properties of Task Environments - Part 2 -->
+      <section class="slide" id="slide-6">
+        <h2>Task Environment <span class="gradient-text">Classifications (Part 2)</span></h2>
+        <p class="slide-desc">The complexity of an agent increases drastically across these remaining four dimensions:</p>
+        
+        <div class="properties-container-grid">
+          <!-- Property 4 -->
+          <div class="prop-card">
+            <i data-lucide="hourglass" class="p-card-icon"></i>
+            <h4>Episodic vs. Sequential</h4>
+            <p class="p-card-desc">In <strong>Episodic</strong>, the current action does not affect future choices (e.g. part-picking). In <strong>Sequential</strong>, current choices have long-term consequences (e.g. Chess, Taxi driving).</p>
+          </div>
+
+          <!-- Property 5 -->
+          <div class="prop-card">
+            <i data-lucide="rotate-cw" class="p-card-icon"></i>
+            <h4>Static vs. Dynamic</h4>
+            <p class="p-card-desc">In <strong>Static</strong>, the environment doesn't change while the agent is deciding (e.g. Crosswords). In <strong>Dynamic</strong>, it keeps changing (e.g. Taxi driving, trading systems).</p>
+          </div>
+
+          <!-- Property 6 -->
+          <div class="prop-card">
+            <i data-lucide="grid" class="p-card-icon"></i>
+            <h4>Discrete vs. Continuous</h4>
+            <p class="p-card-desc">In <strong>Discrete</strong>, states and actions are distinct and countable (e.g. Chess). In <strong>Continuous</strong>, they represent smooth real numbers (e.g. speed, vehicle coordinates).</p>
+          </div>
+
+          <!-- Property 7 -->
+          <div class="prop-card">
+            <i data-lucide="lightbulb" class="p-card-icon"></i>
+            <h4>Known vs. Unknown</h4>
+            <p class="p-card-desc">Refers to the agent's knowledge of the "rules of physics" of the environment. In an <strong>Unknown</strong> environment, the agent must first learn how it works.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7: Why is PEAS Crucial? -->
+      <section class="slide" id="slide-7">
+        <div class="slide-grid-2">
+          <div class="slide-visual">
+            <div class="nodes-connection">
+              <div class="node-icon p-icon"><i data-lucide="award"></i><span>P</span></div>
+              <div class="node-icon e-icon"><i data-lucide="globe"></i><span>E</span></div>
+              <div class="node-icon a-icon"><i data-lucide="settings"></i><span>A</span></div>
+              <div class="node-icon s-icon"><i data-lucide="radar"></i><span>S</span></div>
+              <div class="central-core">
+                <span>Agent Code</span>
+              </div>
+            </div>
+          </div>
+          <div class="slide-text">
+            <h2>Why the PEAS Framework <span class="gradient-text">Matters</span></h2>
+            <p class="slide-desc">Writing agent code without first defining the PEAS profile is like building a house without a blueprint.</p>
+            
+            <div class="key-points">
+              <div class="k-point">
+                <div class="kp-icon"><i data-lucide="check"></i></div>
+                <div>
+                  <h5>Determines Architectural Limits</h5>
+                  <p>Specifying sensors dictates the ingestion pipelines; actuators define the control loops.</p>
+                </div>
+              </div>
+              <div class="k-point">
+                <div class="kp-icon"><i data-lucide="check"></i></div>
+                <div>
+                  <h5>Guards Against Unintended Behavior</h5>
+                  <p>A poorly defined Performance Measure leads to unexpected strategies (e.g. a cleaner robot staying in a corner doing nothing to avoid using electricity).</p>
+                </div>
+              </div>
+              <div class="k-point">
+                <div class="kp-icon"><i data-lucide="check"></i></div>
+                <div>
+                  <h5>Classifies Complexity</h5>
+                  <p>A PEAS description directly maps to environment properties, indicating if you need simple reflexes or complex neural networks.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8: Interactive PEAS Sandbox -->
+      <section class="slide" id="slide-8">
+        <h2>Interactive <span class="gradient-text">PEAS Sandbox</span></h2>
+        <p class="slide-desc">Design your own AI Agent. Select a template or fill in custom values to generate a PEAS description card.</p>
+        
+        <div class="sandbox-container">
+          <div class="sandbox-form">
+            <div class="form-group">
+              <label for="agent-name">Agent Name</label>
+              <input type="text" id="agent-name" placeholder="e.g. Autonomous Mars Rover" value="Autonomous Mars Rover">
+            </div>
+            
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="agent-p">Performance Measure</label>
+                <textarea id="agent-p" rows="2" placeholder="e.g. Collection of soil samples, safe navigation, energy conservation">Collection of soil samples, safe traversal of terrain, battery life maximization</textarea>
+              </div>
+              <div class="form-group">
+                <label for="agent-e">Environment</label>
+                <textarea id="agent-e" rows="2" placeholder="e.g. Martian surface, rocky landscape, atmospheric wind">Martian surface, rocky terrain, dust storms, severe temperature variations</textarea>
+              </div>
+            </div>
+
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="agent-a">Actuators</label>
+                <textarea id="agent-a" rows="2" placeholder="e.g. Wheel drive motors, robotic arm, communications antenna">Robotic drill, arm joints, wheel steering/drive motors, radio transmitter</textarea>
+              </div>
+              <div class="form-group">
+                <label for="agent-s">Sensors</label>
+                <textarea id="agent-s" rows="2" placeholder="e.g. Stereo cameras, infrared detectors, battery sensor">Stereo navigation cameras, spectrometer, temperature sensors, battery gauge</textarea>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-full" onclick="generateSandboxCard()">
+              <i data-lucide="sparkles"></i>
+              <span>Generate Spec Card</span>
+            </button>
+          </div>
+
+          <div class="sandbox-preview">
+            <div class="sandbox-card" id="sandboxCard">
+              <div class="card-brand">
+                <i data-lucide="terminal"></i>
+                <span>Generated Spec</span>
+              </div>
+              <h3 id="preview-title">Autonomous Mars Rover</h3>
+              
+              <div class="preview-grid">
+                <div class="preview-item">
+                  <span class="preview-label"><span class="badge-mini p-color">P</span> Performance Measure</span>
+                  <p id="preview-p">Collection of soil samples, safe traversal of terrain, battery life maximization</p>
+                </div>
+                <div class="preview-item">
+                  <span class="preview-label"><span class="badge-mini e-color">E</span> Environment</span>
+                  <p id="preview-e">Martian surface, rocky terrain, dust storms, severe temperature variations</p>
+                </div>
+                <div class="preview-item">
+                  <span class="preview-label"><span class="badge-mini a-color">A</span> Actuators</span>
+                  <p id="preview-a">Robotic drill, arm joints, wheel steering/drive motors, radio transmitter</p>
+                </div>
+                <div class="preview-item">
+                  <span class="preview-label"><span class="badge-mini s-color">S</span> Sensors</span>
+                  <p id="preview-s">Stereo navigation cameras, spectrometer, temperature sensors, battery gauge</p>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <button class="btn-text" onclick="downloadSpecAsText()">
+                  <i data-lucide="copy"></i>
+                  <span>Copy to Clipboard</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9: Conclusion -->
+      <section class="slide" id="slide-9">
+        <div class="hero-content text-center">
+          <div class="badge glow-purple">Wrap Up</div>
+          <h2>Mastering the <span class="gradient-text">PEAS Blueprint</span></h2>
+          <p class="subtitle max-w-2xl">
+            Designing successful agents begins by defining their performance metrics, environment complexity, action capabilities, and perceptual reach.
+          </p>
+          
+          <div class="conclusion-cards">
+            <div class="c-card">
+              <i data-lucide="target"></i>
+              <h4>P - Performance</h4>
+              <p>Keep it goal-oriented, not instruction-oriented.</p>
+            </div>
+            <div class="c-card">
+              <i data-lucide="compass"></i>
+              <h4>E - Environment</h4>
+              <p>Understand the dynamic constraints of the external world.</p>
+            </div>
+            <div class="c-card">
+              <i data-lucide="cog"></i>
+              <h4>A - Actuators</h4>
+              <p>Optimize choices for effective physical/digital agency.</p>
+            </div>
+            <div class="c-card">
+              <i data-lucide="radio"></i>
+              <h4>S - Sensors</h4>
+              <p>Ensure resolution matches decisions requirements.</p>
+            </div>
+          </div>
+
+          <div class="hero-actions center">
+            <button class="btn btn-secondary" onclick="goToSlide(1)">
+              <i data-lucide="rotate-ccw"></i>
+              <span>Restart Presentation</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Presentation Control Bar -->
+    <footer class="presentation-controls">
+      <div class="controls-left">
+        <span class="slide-indicator" id="slideIndicator">Slide 1 / 9</span>
+      </div>
+      <div class="controls-center">
+        <button class="control-btn" id="prevBtn" onclick="prevSlide()" disabled>
+          <i data-lucide="chevron-left"></i>
+        </button>
+        <div class="slide-dots" id="slideDots">
+          <!-- Dots will be populated by Javascript -->
+        </div>
+        <button class="control-btn" id="nextBtn" onclick="nextSlide()">
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+      <div class="controls-right">
+        <button class="control-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+          <i data-lucide="maximize-2"></i>
+        </button>
+      </div>
+    </footer>
+
+    <!-- Global Progress Bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

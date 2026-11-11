@@ -1,0 +1,473 @@
+{
+  "users": [
+    {
+      "id": "usr-1",
+      "name": "Super Admin",
+      "username": "admin",
+      "email": "admin@utilis.com",
+      "password": "123",
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": "usr-2",
+      "name": "John",
+      "username": "john",
+      "email": "john@gmail.com",
+      "password": "123",
+      "role": "customer",
+      "status": "active"
+    },
+    {
+      "id": "usr-3",
+      "name": "Jane Smith",
+      "username": "jane",
+      "email": "jane@yahoo.com",
+      "password": "123",
+      "role": "customer",
+      "status": "active"
+    },
+    {
+      "id": "usr-4",
+      "name": "Joe Worker",
+      "username": "joe",
+      "email": "joe@utilis.com",
+      "password": "123",
+      "role": "employee",
+      "status": "active"
+    },
+    {
+      "id": "use-545294",
+      "name": "Alif Rudaba Ronja",
+      "username": "Ronja",
+      "email": "ronja@gmail.com",
+      "password": "123456",
+      "role": "customer",
+      "status": "active"
+    },
+    {
+      "id": "use-785327",
+      "name": "Hasan Mahmud",
+      "username": "hasan_m",
+      "email": "hasan@gmail.com",
+      "password": "123",
+      "role": "customer",
+      "status": "active"
+    },
+    {
+      "id": "use-505992",
+      "name": "Test User",
+      "username": "test_u",
+      "email": "test@gmail.com",
+      "password": "123",
+      "role": "customer",
+      "status": "active"
+    }
+  ],
+  "customers": [
+    {
+      "customer_id": "cus-1",
+      "user_id": "usr-2",
+      "phone": "01711122233",
+      "address": "Dhaka, Bangladesh"
+    },
+    {
+      "customer_id": "cus-2",
+      "user_id": "usr-3",
+      "phone": "01822233344",
+      "address": "Chittagong, Bangladesh"
+    },
+    {
+      "customer_id": "cus-462644",
+      "user_id": "use-545294",
+      "phone": "01811111111",
+      "address": "Dhaka"
+    },
+    {
+      "customer_id": "cus-872814",
+      "user_id": "use-785327",
+      "phone": "01722222222",
+      "address": "uttora"
+    },
+    {
+      "customer_id": "cus-890483",
+      "user_id": "use-505992",
+      "phone": "01911111111",
+      "address": "Mirpur, Dhaka"
+    }
+  ],
+  "meters": [
+    {
+      "meter_id": "met-1",
+      "customer_id": "cus-1",
+      "meter_number": "MET-829482",
+      "utilityType": "electricity",
+      "status": "active",
+      "installDate": "2025-01-10"
+    },
+    {
+      "meter_id": "met-2",
+      "customer_id": "cus-2",
+      "meter_number": "MET-384920",
+      "utilityType": "water",
+      "status": "active",
+      "installDate": "2025-03-15"
+    },
+    {
+      "meter_id": "met-3",
+      "customer_id": "cus-1",
+      "meter_number": "MET-928472",
+      "utilityType": "gas",
+      "status": "active",
+      "installDate": "2025-05-20"
+    },
+    {
+      "meter_id": "met-4",
+      "customer_id": "cus-1",
+      "meter_number": "MET-112233",
+      "utilityType": "water",
+      "status": "active",
+      "installDate": "2025-02-15"
+    },
+    {
+      "meter_id": "met-5",
+      "customer_id": "cus-1",
+      "meter_number": "MET-998877",
+      "utilityType": "wifi",
+      "status": "active",
+      "installDate": "2025-06-01"
+    },
+    {
+      "meter_id": "met-110276",
+      "meter_number": "MET-100200",
+      "utilityType": "electricity",
+      "installDate": "60625-02-02",
+      "customer_id": "cus-872814",
+      "status": "active"
+    },
+    {
+      "meter_id": "met-260453",
+      "meter_number": "MET-DIRECT-999",
+      "utilityType": "electricity",
+      "installDate": "2026-06-25",
+      "customer_id": "cus-890483",
+      "status": "active"
+    }
+  ],
+  "meter_readings": [
+    {
+      "reading_id": "rea-1",
+      "meter_id": "met-1",
+      "month": "April",
+      "unit_consumed": 1100
+    },
+    {
+      "reading_id": "rea-2",
+      "meter_id": "met-1",
+      "month": "May",
+      "unit_consumed": 1250
+    },
+    {
+      "reading_id": "rea-3",
+      "meter_id": "met-2",
+      "month": "April",
+      "unit_consumed": 390
+    },
+    {
+      "reading_id": "rea-4",
+      "meter_id": "met-2",
+      "month": "May",
+      "unit_consumed": 420
+    },
+    {
+      "reading_id": "rea-5",
+      "meter_id": "met-3",
+      "month": "April",
+      "unit_consumed": 200
+    },
+    {
+      "reading_id": "rea-6",
+      "meter_id": "met-3",
+      "month": "May",
+      "unit_consumed": 250
+    },
+    {
+      "reading_id": "rea-7",
+      "meter_id": "met-3",
+      "month": "June",
+      "unit_consumed": 290
+    },
+    {
+      "reading_id": "rea-8",
+      "meter_id": "met-4",
+      "month": "April",
+      "unit_consumed": 100
+    },
+    {
+      "reading_id": "rea-9",
+      "meter_id": "met-4",
+      "month": "May",
+      "unit_consumed": 120
+    },
+    {
+      "reading_id": "rea-10",
+      "meter_id": "met-4",
+      "month": "June",
+      "unit_consumed": 150
+    },
+    {
+      "reading_id": "rea-11",
+      "meter_id": "met-5",
+      "month": "May",
+      "unit_consumed": 50
+    },
+    {
+      "reading_id": "rea-12",
+      "meter_id": "met-5",
+      "month": "June",
+      "unit_consumed": 130
+    },
+    {
+      "reading_id": "met-772567",
+      "meter_id": "met-110276",
+      "month": "Initial",
+      "unit_consumed": 100
+    },
+    {
+      "reading_id": "met-574065",
+      "meter_id": "met-260453",
+      "month": "Initial",
+      "unit_consumed": 0
+    }
+  ],
+  "bills": [
+    {
+      "bill_id": "bil-2",
+      "customer_id": "cus-2",
+      "amount": 450,
+      "due_date": "2026-06-12",
+      "status": "paid",
+      "billingMonth": "May",
+      "billingYear": "2026",
+      "meterId": "met-2",
+      "prevReading": 390,
+      "currReading": 420,
+      "consumption": 30,
+      "tariffRate": 15,
+      "createdAt": "2026-05-26",
+      "paymentDate": "2026-06-02"
+    },
+    {
+      "bill_id": "bil-3",
+      "customer_id": "cus-1",
+      "amount": 900,
+      "due_date": "2026-05-10",
+      "status": "paid",
+      "billingMonth": "April",
+      "billingYear": "2026",
+      "meterId": "met-1",
+      "prevReading": 980,
+      "currReading": 1100,
+      "consumption": 120,
+      "tariffRate": 7.5,
+      "createdAt": "2026-04-25",
+      "paymentDate": "2026-05-02"
+    },
+    {
+      "bill_id": "bil-4",
+      "customer_id": "cus-1",
+      "amount": 300,
+      "due_date": "2026-06-20",
+      "status": "paid",
+      "billingMonth": "May",
+      "billingYear": "2026",
+      "meterId": "met-4",
+      "prevReading": 100,
+      "currReading": 120,
+      "consumption": 20,
+      "tariffRate": 15,
+      "createdAt": "2026-05-25",
+      "paymentDate": "2026-06-02"
+    },
+    {
+      "bill_id": "bil-5",
+      "customer_id": "cus-1",
+      "amount": 450,
+      "due_date": "2026-07-10",
+      "status": "unpaid",
+      "billingMonth": "June",
+      "billingYear": "2026",
+      "meterId": "met-4",
+      "prevReading": 120,
+      "currReading": 150,
+      "consumption": 30,
+      "tariffRate": 15,
+      "createdAt": "2026-06-25"
+    },
+    {
+      "bill_id": "bil-6",
+      "customer_id": "cus-1",
+      "amount": 600,
+      "due_date": "2026-06-15",
+      "status": "paid",
+      "billingMonth": "May",
+      "billingYear": "2026",
+      "meterId": "met-3",
+      "prevReading": 200,
+      "currReading": 250,
+      "consumption": 50,
+      "tariffRate": 12,
+      "createdAt": "2026-05-25",
+      "paymentDate": "2026-06-02"
+    },
+    {
+      "bill_id": "bil-7",
+      "customer_id": "cus-1",
+      "amount": 480,
+      "due_date": "2026-07-10",
+      "status": "unpaid",
+      "billingMonth": "June",
+      "billingYear": "2026",
+      "meterId": "met-3",
+      "prevReading": 250,
+      "currReading": 290,
+      "consumption": 40,
+      "tariffRate": 12,
+      "createdAt": "2026-06-25"
+    },
+    {
+      "bill_id": "bil-8",
+      "customer_id": "cus-1",
+      "amount": 500,
+      "due_date": "2026-06-10",
+      "status": "paid",
+      "billingMonth": "May",
+      "billingYear": "2026",
+      "meterId": "met-5",
+      "prevReading": 0,
+      "currReading": 50,
+      "consumption": 50,
+      "tariffRate": 10,
+      "createdAt": "2026-05-25",
+      "paymentDate": "2026-06-01"
+    },
+    {
+      "bill_id": "bil-9",
+      "customer_id": "cus-1",
+      "amount": 800,
+      "due_date": "2026-07-12",
+      "status": "unpaid",
+      "billingMonth": "June",
+      "billingYear": "2026",
+      "meterId": "met-5",
+      "prevReading": 50,
+      "currReading": 130,
+      "consumption": 80,
+      "tariffRate": 10,
+      "createdAt": "2026-06-25"
+    }
+  ],
+  "payments": [
+    {
+      "payment_id": "pay-1",
+      "bill_id": "bil-2",
+      "amount": 450,
+      "payment_date": "2026-06-02",
+      "method": "bkash",
+      "transactionId": "BKX93740284",
+      "status": "verified"
+    },
+    {
+      "payment_id": "pay-2",
+      "bill_id": "bil-3",
+      "amount": 900,
+      "payment_date": "2026-05-02",
+      "method": "card",
+      "transactionId": "CRD82749023",
+      "status": "verified"
+    }
+  ],
+  "complaints": [
+    {
+      "complaint_id": "cmp-1",
+      "customer_id": "cus-1",
+      "subject": "High Billing Amount",
+      "description": "The bill generated for May seems unusually high compared to my average consumption.",
+      "status": "processing",
+      "assignedTo": "usr-4",
+      "createdAt": "2026-06-01",
+      "comments": [
+        {
+          "author": "Joe Worker",
+          "text": "Checked the meter reading, it is correct.",
+          "date": "2026-06-03"
+        },
+        {
+          "author": "John",
+          "text": "good work",
+          "date": "2026-06-25"
+        }
+      ]
+    },
+    {
+      "complaint_id": "cmp-2",
+      "customer_id": "cus-2",
+      "subject": "Meter display flickering",
+      "description": "The display of my water meter is flickering and hard to read.",
+      "status": "pending",
+      "assignedTo": "usr-4",
+      "createdAt": "2026-06-15",
+      "comments": []
+    }
+  ],
+  "notifications": [
+    {
+      "id": "ntf-1",
+      "userId": "usr-2",
+      "message": "Your bill for May 2026 has been generated.",
+      "type": "info",
+      "date": "2026-05-25",
+      "isRead": false
+    },
+    {
+      "id": "ntf-2",
+      "userId": "usr-3",
+      "message": "Payment of BDT 450 received successfully.",
+      "type": "success",
+      "date": "2026-06-02",
+      "isRead": true
+    },
+    {
+      "id": "not-100508",
+      "userId": "usr-1",
+      "message": "New customer registered: Alif Rudaba Ronja (Ronja)",
+      "type": "info",
+      "date": "2026-06-22",
+      "isRead": false
+    },
+    {
+      "id": "not-173271",
+      "userId": "use-505992",
+      "message": "Meter MET-DIRECT-999 has been created and assigned to your account.",
+      "type": "success",
+      "date": "2026-06-25",
+      "isRead": false
+    },
+    {
+      "id": "not-956085",
+      "userId": "usr-3",
+      "message": "Your ticket \"Meter display flickering\" status is now: PENDING",
+      "type": "info",
+      "date": "2026-11-11",
+      "isRead": false
+    },
+    {
+      "id": "not-594014",
+      "userId": "usr-4",
+      "message": "You have been assigned a new ticket: \"Meter display flickering\"",
+      "type": "warning",
+      "date": "2026-11-11",
+      "isRead": false
+    }
+  ]
+}
