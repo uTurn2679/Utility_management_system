@@ -13,6 +13,7 @@ app.use(express.json());
 // Serve frontend static files
 const frontendPath = path.join(__dirname, '../frontend');
 app.use(express.static(frontendPath));
+app.use(express.static(path.join(__dirname, '..')));
 
 const PK_MAP = {
   users: 'id',
