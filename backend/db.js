@@ -4,8 +4,18 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 let pool = null;
+let pgPool = null;
+let dbType = 'json'; // 'pg', 'mysql', or 'json'
 let useFallback = false;
 const DB_FILE = path.join(__dirname, 'data', 'db.json');
+
+// Ensure data/db.json is bundled and available in Vercel serverless
+let bundledDB = {};
+try {
+  bundledDB = require('./data/db.json');
+} catch (e) {
+  bundledDB = {};
+}
 
 const PK_MAP = {
   users: 'id',
@@ -21,20 +31,25 @@ const PK_MAP = {
 
 async function query(sql, params = []) {
   if (useFallback) return null;
-  const [results] = await pool.query(sql, params);
-  return results;
+  if (dbType === 'pg' && pgPool) {
+    const res = await pgPool.query(sql, params);
+    return res.rows;
+  }
+  if (pool) {
+    const [results] = await pool.query(sql, params);
+    return results;
+  }
+  return null;
 }
 
 // Local File Database Helper Methods (Fallback)
 function readLocalDatabase() {
-  if (!fs.existsSync(DB_FILE)) {
-    return {};
+  if (fs.existsSync(DB_FILE)) {
+    try {
+      return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+    } catch (err) {}
   }
-  try {
-    return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
-  } catch (err) {
-    return {};
-  }
+  return bundledDB || {};
 }
 
 function writeLocalDatabase(data) {
@@ -45,65 +60,85 @@ function writeLocalDatabase(data) {
     }
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf8');
   } catch (err) {
-    console.warn('Local database write skipped (read-only environment):', err.message);
+    // In serverless read-only disk, update bundled memory copy
+    bundledDB = data;
   }
 }
 
 // Database Connection Initialization
 async function initDB() {
-  try {
-    // 1. Try connecting to MySQL without database first to ensure it exists
-    const conn = await mysql.createConnection({
-      host: process.env.DB_HOST || 'localhost',
-      port: process.env.DB_PORT || 3306,
-      user: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSWORD || ''
-    });
-    await conn.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME || 'utilis_db'}\``);
-    await conn.end();
+  const dbUrl = process.env.DATABASE_URL;
 
-    // 2. Setup connection pool
-    pool = mysql.createPool({
-      host: process.env.DB_HOST || 'localhost',
-      port: process.env.DB_PORT || 3306,
-      user: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSWORD || '',
-      database: process.env.DB_NAME || 'utilis_db',
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0
-    });
-
-    // Test pool connection
-    const testConn = await pool.getConnection();
-    testConn.release();
-    console.log('✅ MySQL connection established successfully.');
-
-    // 3. Run schema migrations
-    const schemaPath = path.join(__dirname, 'schema.sql');
-    if (fs.existsSync(schemaPath)) {
-      const schemaSql = fs.readFileSync(schemaPath, 'utf8');
-      const statements = schemaSql
-        .split(';')
-        .map(s => s.trim())
-        .filter(s => s.length > 0);
-
-      for (const statement of statements) {
-        if (statement.toLowerCase().startsWith('use ')) continue;
-        await pool.query(statement);
-      }
-      console.log('✅ MySQL schema checked and initialized.');
+  // 1. Neon PostgreSQL support via DATABASE_URL
+  if (dbUrl && (dbUrl.startsWith('postgres://') || dbUrl.startsWith('postgresql://'))) {
+    try {
+      const { Pool } = require('pg');
+      pgPool = new Pool({
+        connectionString: dbUrl,
+        ssl: { rejectUnauthorized: false },
+        connectionTimeoutMillis: 4000
+      });
+      const client = await pgPool.connect();
+      client.release();
+      dbType = 'pg';
+      useFallback = false;
+      console.log('✅ Neon PostgreSQL connected successfully.');
+      return;
+    } catch (err) {
+      console.warn('⚠️ Neon PostgreSQL connection failed:', err.message);
+      console.warn('🔄 Using bundled JSON database.');
+      useFallback = true;
+      return;
     }
-  } catch (error) {
-    console.warn('⚠️ MySQL connection failed. Error details:', error.message);
-    console.warn('🔄 Falling back to JSON File Database (db.json). Please check backend/.env credentials.');
-    useFallback = true;
   }
+
+  // 2. Local/Remote MySQL support (only if DB_HOST is explicitly configured)
+  if (process.env.DB_HOST && process.env.VERCEL !== '1') {
+    try {
+      const conn = await mysql.createConnection({
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT || 3306,
+        user: process.env.DB_USER || 'root',
+        password: process.env.DB_PASSWORD || '',
+        connectTimeout: 3000
+      });
+      await conn.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME || 'utilis_db'}\``);
+      await conn.end();
+
+      pool = mysql.createPool({
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT || 3306,
+        user: process.env.DB_USER || 'root',
+        password: process.env.DB_PASSWORD || '',
+        database: process.env.DB_NAME || 'utilis_db',
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0,
+        connectTimeout: 3000
+      });
+
+      const testConn = await pool.getConnection();
+      testConn.release();
+      dbType = 'mysql';
+      useFallback = false;
+      console.log('✅ MySQL connection established.');
+      return;
+    } catch (err) {
+      console.warn('⚠️ MySQL connection failed:', err.message);
+      useFallback = true;
+      return;
+    }
+  }
+
+  // 3. Instant Fallback for Vercel / zero-config environments
+  useFallback = true;
+  dbType = 'json';
+  console.log('✅ Using bundled high-speed JSON database (db.json).');
 }
 
 // Relational CRUD Operations mapped to MySQL
 async function getFullDB() {
-  if (useFallback) {
+  if (useFallback || (!pool && !pgPool)) {
     return readLocalDatabase();
   }
 

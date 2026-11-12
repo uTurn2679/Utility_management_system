@@ -218,28 +218,28 @@ app.get('*', (req, res, next) => {
   next();
 });
 
-// Initialize database schema and then start the server
-initDB().then(() => {
-  const { getPool } = require('./db');
-  const pool = getPool();
-  if (pool) {
-    setPool(pool);
-    // Run upcoming bill due reminder checks on startup
-    checkAndNotifyUpcomingBills().catch(e => console.error('Upcoming bills check error:', e.message));
-    // Set a recurring check every 12 hours
-    setInterval(() => {
+// Initialize database and start server
+if (process.env.VERCEL !== '1') {
+  initDB().then(() => {
+    const { getPool } = require('./db');
+    const pool = getPool();
+    if (pool) {
+      setPool(pool);
       checkAndNotifyUpcomingBills().catch(e => console.error('Upcoming bills check error:', e.message));
-    }, 12 * 60 * 60 * 1000);
-  }
+      setInterval(() => {
+        checkAndNotifyUpcomingBills().catch(e => console.error('Upcoming bills check error:', e.message));
+      }, 12 * 60 * 60 * 1000);
+    }
 
-  // Start HTTP listener when run directly (local development)
-  if (process.env.VERCEL !== '1') {
     app.listen(PORT, () => {
       console.log(`Backend server running at http://localhost:${PORT}`);
     });
-  }
-}).catch(err => {
-  console.error('Database initialization error:', err);
-});
+  }).catch(err => {
+    console.error('Database initialization error:', err);
+  });
+} else {
+  // Fast non-blocking initialization on Vercel
+  initDB().catch(e => console.warn('Vercel initDB:', e.message));
+}
 
 module.exports = app;
