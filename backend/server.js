@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const { initDB, getFullDB, saveTable, insertItem, updateItem, deleteItem } = require('./db');
 const { setPool, notifyNewBill, checkAndNotifyUpcomingBills } = require('./notificationHelper');
 
@@ -8,6 +9,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+// Serve frontend static files
+const frontendPath = path.join(__dirname, '../frontend');
+app.use(express.static(frontendPath));
 
 const PK_MAP = {
   users: 'id',
@@ -200,7 +205,17 @@ app.delete('/api/:table/:id', async (req, res) => {
   }
 });
 
-
+// Fallback route for frontend
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
+  const indexPath = path.join(__dirname, '../frontend/index.html');
+  if (require('fs').existsSync(indexPath)) {
+    return res.sendFile(indexPath);
+  }
+  next();
+});
 
 // Initialize database schema and then start the server
 initDB().then(() => {

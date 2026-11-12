@@ -2,7 +2,9 @@
   "name": "utilis-app",
   "version": "1.0.0",
   "description": "Utility Management System",
+  "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "install-all": "npm install && cd backend && npm install",
     "backend": "node backend/server.js",
     "frontend": "npx http-server ./frontend -p 8080 -c-1 -o",
